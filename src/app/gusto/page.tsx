@@ -104,7 +104,14 @@ export default async function GustoLandingPage() {
           Sign up through this link, run your first payroll, and receive a $200 Visa gift card within about 30 days.
         </p>
         <div className="mt-8">
-          <CTAButton referralKey="gusto" label="Claim Your $200 Bonus →" size="lg" className="px-8" />
+          <CTAButton
+            referralKey="gusto"
+            label="Claim Your $200 Bonus →"
+            size="lg"
+            className="px-8"
+            ctaLocation="gusto_hero"
+            trackingVariant="hero_primary"
+          />
           <p className="mt-3 text-sm text-muted">Used by 300,000+ businesses · Rated 4.7/5</p>
         </div>
       </section>
@@ -177,7 +184,13 @@ export default async function GustoLandingPage() {
         <h2 className="text-3xl font-semibold tracking-tight">Ready to get your $200?</h2>
         <p className="mt-3 text-muted">Sign up for Gusto and run your first payroll to qualify for the gift card.</p>
         <div className="mt-5">
-          <CTAButton referralKey="gusto" label="Sign Up for Gusto Now →" size="lg" />
+          <CTAButton
+            referralKey="gusto"
+            label="Sign Up for Gusto Now →"
+            size="lg"
+            ctaLocation="gusto_final"
+            trackingVariant="bottom_primary"
+          />
         </div>
       </section>
 
@@ -199,7 +212,7 @@ export default async function GustoLandingPage() {
         }
       />
 
-      <StickyMobileCTA referralKey="gusto" label="Claim Your $200 Bonus" />
+      <StickyMobileCTA referralKey="gusto" label="Claim Your $200 Bonus" ctaLocation="gusto_sticky_mobile" />
     </div>
   );
 }

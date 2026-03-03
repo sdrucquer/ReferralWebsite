@@ -28,6 +28,13 @@ export function generateMetadata({ params }: GuidePageProps): Metadata {
     alternates: {
       canonical: doc.urlPath
     },
+    robots:
+      doc.frontmatter.contentStatus === "scaffold"
+        ? {
+            index: false,
+            follow: true
+          }
+        : undefined,
     openGraph: {
       type: "article",
       title: doc.frontmatter.seoTitle,

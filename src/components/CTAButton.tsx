@@ -1,4 +1,7 @@
+"use client";
+
 import { getReferralProgram } from "@/config/referrals";
+import { trackCtaClick } from "@/lib/analytics/cta";
 import { cn } from "@/lib/utils/cn";
 import type { ReferralKey } from "@/types/content";
 
@@ -9,6 +12,8 @@ export interface CTAButtonProps {
   size?: "sm" | "md" | "lg";
   showOffer?: boolean;
   className?: string;
+  ctaLocation?: string;
+  trackingVariant?: string;
 }
 
 const sizeClasses = {
@@ -23,17 +28,30 @@ export function CTAButton({
   label,
   size = "md",
   showOffer = false,
-  className
+  className,
+  ctaLocation = "unknown",
+  trackingVariant
 }: CTAButtonProps) {
   const referral = getReferralProgram(referralKey);
   const finalLabel = label ?? `Claim ${referral.offer}`;
   const isExternal = referral.url.startsWith("http");
+  const eventVariant = trackingVariant ?? variant;
+
+  function handleClick() {
+    trackCtaClick({
+      cta_location: ctaLocation,
+      referral_key: referralKey,
+      page_path: typeof window !== "undefined" ? window.location.pathname : "/",
+      variant: eventVariant
+    });
+  }
 
   return (
     <a
       href={referral.url}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "nofollow sponsored noopener noreferrer" : undefined}
+      onClick={handleClick}
       className={cn(
         "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300",
         sizeClasses[size],

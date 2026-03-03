@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import { CTAButton } from "@/components/CTAButton";
 import { ReviewCard } from "@/components/ReviewCard";
 import { StatCounter } from "@/components/StatCounter";
 import { HowItWorks } from "@/components/HowItWorks";
@@ -45,12 +46,14 @@ export default function HomePage() {
             personally tested in my business.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/gusto"
-              className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition hover:brightness-95"
-            >
-              See Our Top Pick for Payroll →
-            </Link>
+            <CTAButton
+              referralKey="none"
+              label="See Our Top Pick for Payroll →"
+              size="lg"
+              className="px-6 py-3"
+              ctaLocation="homepage_hero"
+              trackingVariant="hero_primary"
+            />
             <Link
               href="/about"
               className="rounded-full border border-border px-6 py-3 text-sm font-semibold text-text transition hover:border-accent hover:text-accent"

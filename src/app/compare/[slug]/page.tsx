@@ -29,7 +29,14 @@ export function generateMetadata({ params }: ComparisonPageProps): Metadata {
     description: doc.frontmatter.description,
     alternates: {
       canonical: doc.urlPath
-    }
+    },
+    robots:
+      doc.frontmatter.contentStatus === "scaffold"
+        ? {
+            index: false,
+            follow: true
+          }
+        : undefined
   };
 }
 
@@ -67,7 +74,12 @@ export default async function ComparisonPage({ params }: ComparisonPageProps) {
           <h2 className="mt-2 text-2xl font-semibold tracking-tight">{data.winner}</h2>
           <p className="mt-3 text-muted">{data.winnerReason}</p>
           <div className="mt-4">
-            <CTAButton referralKey={data.ctaReferralKey} label="Try Our Top Pick →" />
+            <CTAButton
+              referralKey={data.ctaReferralKey}
+              label="Try Our Top Pick →"
+              ctaLocation="comparison_our_pick"
+              trackingVariant="section_primary"
+            />
           </div>
         </section>
       ) : null}

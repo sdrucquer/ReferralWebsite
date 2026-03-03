@@ -52,7 +52,14 @@ export function generateMetadata({ params }: ReviewPageProps): Metadata {
       card: "summary_large_image",
       title: frontmatter.seoTitle,
       description: frontmatter.description
-    }
+    },
+    robots:
+      frontmatter.contentStatus === "scaffold"
+        ? {
+            index: false,
+            follow: true
+          }
+        : undefined
   };
 }
 
@@ -91,7 +98,13 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
           </span>
         </div>
         <div className="mt-6 flex flex-wrap gap-3">
-          <CTAButton referralKey={frontmatter.referralKey} label={`Claim ${frontmatter.referralOffer} →`} size="lg" />
+          <CTAButton
+            referralKey={frontmatter.referralKey}
+            label={`Claim ${frontmatter.referralOffer} →`}
+            size="lg"
+            ctaLocation="review_primary"
+            trackingVariant="header_primary"
+          />
           <Link
             href="/gusto"
             className="inline-flex items-center rounded-full border border-border px-6 py-3 text-sm font-semibold hover:border-accent hover:text-accent"
@@ -155,7 +168,11 @@ export default async function ReviewPage({ params }: ReviewPageProps) {
         }
       />
 
-      <StickyMobileCTA referralKey={frontmatter.referralKey} label={`Claim ${frontmatter.referralOffer}`} />
+      <StickyMobileCTA
+        referralKey={frontmatter.referralKey}
+        label={`Claim ${frontmatter.referralOffer}`}
+        ctaLocation="review_sticky_mobile"
+      />
     </article>
   );
 }

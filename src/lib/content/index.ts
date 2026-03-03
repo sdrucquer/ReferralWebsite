@@ -6,6 +6,7 @@ import type {
   ArticleFrontmatter,
   BaseFrontmatter,
   ContentDocument,
+  ContentStatus,
   ContentType,
   HeadingItem,
   ReviewFrontmatter
@@ -100,6 +101,9 @@ function mapUrlPath(type: ContentType, slugSegments: string[]) {
 }
 
 function normalizeFrontmatter(type: ContentType, rawData: Record<string, unknown>) {
+  const statusValue = String(rawData.contentStatus ?? "ready");
+  const contentStatus: ContentStatus = statusValue === "scaffold" ? "scaffold" : "ready";
+
   const base: BaseFrontmatter = {
     title: String(rawData.title ?? "Untitled"),
     seoTitle: String(rawData.seoTitle ?? rawData.title ?? "Untitled"),
@@ -108,7 +112,8 @@ function normalizeFrontmatter(type: ContentType, rawData: Record<string, unknown
     lastUpdated: String(rawData.lastUpdated ?? new Date().toISOString().slice(0, 10)),
     author: String(rawData.author ?? "Shanin"),
     featured: Boolean(rawData.featured ?? false),
-    slug: rawData.slug ? String(rawData.slug) : undefined
+    slug: rawData.slug ? String(rawData.slug) : undefined,
+    contentStatus
   };
 
   if (type === "review") {
@@ -239,4 +244,8 @@ export function getRelatedReviews(currentId: string, limit = 3) {
   return (getDocumentsByType("review") as Array<ContentDocument<ReviewFrontmatter>>)
     .filter((doc) => doc.id !== currentId)
     .slice(0, limit);
+}
+
+export function isIndexable(doc: ContentDocument) {
+  return doc.frontmatter.contentStatus !== "scaffold";
 }

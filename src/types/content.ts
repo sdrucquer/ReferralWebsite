@@ -1,6 +1,7 @@
 export type ReferralKey = "gusto" | "jobber" | "quickbooks" | "quo" | "none";
 
 export type ContentType = "review" | "guide" | "comparison" | "roundup" | "landing";
+export type ContentStatus = "ready" | "scaffold";
 
 export interface BaseFrontmatter {
   title: string;
@@ -11,6 +12,7 @@ export interface BaseFrontmatter {
   author: string;
   featured?: boolean;
   slug?: string;
+  contentStatus?: ContentStatus;
 }
 
 export interface ReviewFrontmatter extends BaseFrontmatter {

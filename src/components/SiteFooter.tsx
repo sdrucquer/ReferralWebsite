@@ -39,13 +39,31 @@ export function SiteFooter() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">Disclosure</h3>
+          <h3 className="text-sm font-semibold uppercase tracking-wider text-muted">Disclosure & Legal</h3>
           <p className="mt-3 text-sm leading-7 text-muted">
             We may receive a referral bonus when you sign up through our links. This never costs you extra.
           </p>
+          <ul className="mt-3 space-y-1 text-sm">
+            <li>
+              <Link href="/disclosure" className="text-muted hover:text-accent">
+                Affiliate Disclosure
+              </Link>
+            </li>
+            <li>
+              <Link href="/privacy" className="text-muted hover:text-accent">
+                Privacy Policy
+              </Link>
+            </li>
+            <li>
+              <Link href="/terms" className="text-muted hover:text-accent">
+                Terms of Use
+              </Link>
+            </li>
+          </ul>
           <a href={`mailto:${siteConfig.founder.email}`} className="mt-3 inline-block text-sm text-accent hover:underline">
             {siteConfig.founder.email}
           </a>
+          <p className="mt-3 text-xs text-muted">Template notice: content is informational and not legal advice.</p>
         </div>
       </div>
     </footer>

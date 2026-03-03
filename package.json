@@ -20,8 +20,8 @@
     "framer-motion": "^11.18.2",
     "fuse.js": "^7.1.0",
     "gray-matter": "^4.0.3",
-    "next": "14.2.30",
-    "next-mdx-remote": "^5.0.0",
+    "next": "14.2.35",
+    "next-mdx-remote": "6.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "reading-time": "^1.5.0",
@@ -40,7 +40,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "^14.2.30",
+    "eslint-config-next": "14.2.35",
     "jsdom": "^25.0.1",
     "next-sitemap": "^4.2.3",
     "postcss": "^8.4.49",
@@ -49,5 +49,5 @@
     "typescript": "^5.7.2",
     "vitest": "^3.1.2"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "npm@11.10.1"
 }

@@ -26,14 +26,14 @@ Three strong brand options for final selection:
 ## Quick start
 
 ```bash
-pnpm install
-pnpm generate:search
-pnpm dev
+npm install
+npm run generate:search
+npm run dev
 ```
 
 Open `http://localhost:3000`.
 
-If `pnpm` is not installed in your environment, use the equivalent `npm` commands.
+Package manager policy is standardized on `npm` for local, CI, and Vercel builds.
 
 ## Content architecture
 
@@ -57,7 +57,7 @@ content/
 3. Run:
 
 ```bash
-pnpm generate:search
+npm run generate:search
 ```
 
 4. The review auto-appears in route indexes and search.
@@ -142,7 +142,7 @@ https://your-domain.com/sitemap.xml
 ### Option 2: Vercel CLI
 
 ```bash
-pnpm dlx vercel
+npx vercel
 ```
 
 Then set production domain and env vars in the Vercel dashboard.
@@ -150,13 +150,89 @@ Then set production domain and env vars in the Vercel dashboard.
 ## Build/test commands
 
 ```bash
-pnpm generate:search
-pnpm lint
-pnpm test:unit
-pnpm test:integration
-pnpm test:e2e
-pnpm build
+npm run generate:search
+npm run lint
+npm run test:unit
+npm run test:integration
+npm run test:e2e
+npm run build
 ```
+
+## CI policy
+
+GitHub Actions CI runs:
+
+- `npm run generate:search`
+- `npm run lint`
+- `npm run test:unit`
+- `npm run test:integration`
+- `npm run build`
+
+Workflow file: `.github/workflows/ci.yml`
+
+## Scaffold SEO policy
+
+Content supports frontmatter `contentStatus`:
+
+- `ready`: normal indexing behavior
+- `scaffold`: emitted as `noindex,follow` and excluded from sitemap
+
+This allows unfinished pages to stay reachable while protected from indexing.
+
+## CTA analytics event schema
+
+Tracked event name: `cta_click`
+
+Payload keys:
+
+- `cta_location`
+- `referral_key`
+- `page_path`
+- `variant`
+
+### Validate in GA4 DebugView
+
+1. Enable GA4 env var in `.env.local`.
+2. Run `npm run dev`.
+3. Click tracked CTA buttons on `/`, `/gusto`, and review pages.
+4. Confirm `cta_click` appears in GA4 DebugView with payload fields above.
+
+## Deployment health checklist
+
+Before promoting production:
+
+1. `npm run lint`
+2. `npm run test:unit`
+3. `npm run test:integration`
+4. `npm run build`
+5. `npm run test:e2e`
+6. Validate canonical + robots behavior on scaffold vs ready pages
+7. Validate referral URLs and `rel="nofollow sponsored"`
+
+## Uptime recommendation
+
+Add an external uptime monitor (for example, Better Stack/UptimeRobot) to check:
+
+- `/`
+- `/gusto`
+- `/sitemap.xml`
+
+Use 1-minute checks with email alerts for non-200 responses.
+
+## Dependency and security policy
+
+- Lock dependency versions with `package-lock.json`.
+- Patch only critical/high launch blockers before launch.
+- Defer non-blocking major upgrades to post-launch stabilization.
+
+### Deferred upgrade note
+
+`npm audit` on March 3, 2026 reports remaining high advisories that require major-version upgrades:
+
+- `next` -> fixed in `16.1.6` (major migration from current `14.2.35`).
+- `eslint-config-next` / `@next/eslint-plugin-next` -> fixed in `16.1.6` (dev tooling path, major migration).
+
+These are deferred to a dedicated framework-upgrade sprint after launch stabilization.
 
 ## Key environment variables
 

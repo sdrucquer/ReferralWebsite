@@ -28,7 +28,14 @@ export function generateMetadata({ params }: RoundupPageProps): Metadata {
     description: doc.frontmatter.description,
     alternates: {
       canonical: doc.urlPath
-    }
+    },
+    robots:
+      doc.frontmatter.contentStatus === "scaffold"
+        ? {
+            index: false,
+            follow: true
+          }
+        : undefined
   };
 }
 

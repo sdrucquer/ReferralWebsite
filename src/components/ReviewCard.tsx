@@ -56,7 +56,13 @@ export function ReviewCard({
         >
           Read Review
         </Link>
-        <CTAButton referralKey={referralKey} label="Visit Site" size="sm" />
+        <CTAButton
+          referralKey={referralKey}
+          label="Visit Site"
+          size="sm"
+          ctaLocation={featured ? "featured_review_card" : "review_card"}
+          trackingVariant="card_primary"
+        />
       </div>
     </motion.article>
   );
