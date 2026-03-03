@@ -209,6 +209,14 @@ Before promoting production:
 6. Validate canonical + robots behavior on scaffold vs ready pages
 7. Validate referral URLs and `rel="nofollow sponsored"`
 
+Automated URL smoke check helper:
+
+```bash
+scripts/smoke-check.sh <preview-or-production-url>
+```
+
+Detailed runbook: `docs/launch-runbook.md`
+
 ## Uptime recommendation
 
 Add an external uptime monitor (for example, Better Stack/UptimeRobot) to check:
